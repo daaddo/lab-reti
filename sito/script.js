@@ -377,4 +377,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     positionNavigationBelowMemo();
     window.addEventListener('resize', positionNavigationBelowMemo);
+
+    // Update slide number based on scroll position
+    function updateSlideNumberOnScroll() {
+        const slides = document.querySelectorAll('.slide');
+        const windowHeight = window.innerHeight;
+        const scrollPos = window.scrollY + (windowHeight / 2); // Check middle of viewport
+        
+        let currentSlideNumber = 1;
+        
+        slides.forEach((slide, index) => {
+            const slideTop = slide.offsetTop;
+            const slideBottom = slideTop + slide.offsetHeight;
+            
+            if (scrollPos >= slideTop && scrollPos < slideBottom) {
+                currentSlideNumber = index + 1;
+            }
+        });
+        
+        document.getElementById('current-slide').textContent = currentSlideNumber;
+        window.presentation.currentSlide = currentSlideNumber;
+        window.presentation.updateNavigation();
+    }
+    
+    // Throttle scroll events for performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(updateSlideNumberOnScroll, 50);
+    });
+    
+    // Initial update
+    updateSlideNumberOnScroll();
 }); 
