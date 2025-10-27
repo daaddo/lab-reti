@@ -398,6 +398,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('current-slide').textContent = currentSlideNumber;
         window.presentation.currentSlide = currentSlideNumber;
         window.presentation.updateNavigation();
+        
+        // Update progress bar
+        if (window.progressIndicator) {
+            window.progressIndicator.updateProgress();
+        }
     }
     
     // Throttle scroll events for performance
