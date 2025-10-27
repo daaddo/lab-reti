@@ -22,7 +22,7 @@
                         <p>Architettura e Configurazione di Infrastrutture di Rete</p>
                     </div>
                     <div class="author-info">
-                        <p><strong>Studenti:</strong> Davide Cascella mat:383257<br>Matteo Migliorati mat:300333</p>
+                        <p><strong>Studenti:</strong> Davide Cascella mat:383257<br>Matteo Migliorati mat:382784</p>
                         <p><strong>Corso:</strong> Laboratorio di Reti</p>
                         <p><strong>Anno Accademico:</strong> 2024-2025</p>
                     </div>
@@ -92,67 +92,49 @@
             <div class="slide-content">
                 <h2><i class="fas fa-bullseye"></i> Introduzione</h2>
 
-                <div class="config-section">
-                    <h3>Requisiti dei servizi</h3>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-envelope"></i> Posta elettronica: 1 server</li>
-                        <li><i class="fas fa-globe"></i> Web: 1 server</li>
-                        <li><i class="fas fa-server"></i> DNS: 2 server</li>
-                        <li><i class="fas fa-database"></i> Backup: 1 server</li>
-                    </ul>
-                </div>
-
-                <div class="config-section">
-                    <h3>Contesto aziendale e sedi</h3>
-                    <p>L’azienda Amazin.com è organizzata in 5 edifici con le seguenti caratteristiche:</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Edificio</th>
-                                <th>Num. utenti</th>
-                                <th>Copertura Wi‑Fi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>A</td><td>30</td><td>Sì</td></tr>
-                            <tr><td>B</td><td>40</td><td>No</td></tr>
-                            <tr><td>C</td><td>40</td><td>No</td></tr>
-                            <tr><td>D</td><td>150</td><td>No</td></tr>
-                            <tr><td>E</td><td>50</td><td>No</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="config-section">
-                    <h3>Indirizzamento e subnetting</h3>
-                    <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato con subnetting per edificio.</p>
-                    <ul>
-                        <li>Rete privata: <strong>192.168.X.X</strong></li>
-                        <li>Subnet mask: <strong>255.255.255.0 (/24)</strong></li>
-                        <li>Una sottorete per edificio (fino a 254 host utilizzabili per sede); sottoreti aggiuntive saranno attivabili in seguito.</li>
-                    </ul>
-                </div>
-
                 <div class="two-column">
                     <div class="column">
                         <div class="config-section">
-                            <h3>Topologia e routing</h3>
+                            <h3>Requisiti dei servizi</h3>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-envelope"></i> Posta elettronica: 1 server</li>
+                                <li><i class="fas fa-globe"></i> Web: 1 server</li>
+                                <li><i class="fas fa-server"></i> DNS: 2 server</li>
+                                <li><i class="fas fa-database"></i> Backup: 1 server</li>
+                            </ul>
+                        </div>
+
+                        <div class="config-section">
+                            <h3>Indirizzamento e subnetting</h3>
+                            <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato con subnetting per edificio.</p>
                             <ul>
-                                <li>Topologia prevalente a stella con un tratto a bus tra gli edifici D ed E.</li>
-                                <li>Accesso alla rete esterna gestito nell’edificio <strong>B</strong>.</li>
-                                <li>Ogni edificio è dotato di un router; collegamenti inter-sede in fibra ottica.</li>
-                                <li>Protocollo di routing interno: <strong>RIP</strong>, adeguato alle dimensioni dell’infrastruttura.</li>
+                                <li>Rete privata: <strong>192.168.X.X</strong></li>
+                                <li>Subnet mask: <strong>255.255.255.0 (/24)</strong></li>
+                                <li>Una sottorete per edificio (fino a 254 host utilizzabili per sede); sottoreti aggiuntive saranno attivabili in seguito.</li>
                             </ul>
                         </div>
                     </div>
+
                     <div class="column">
                         <div class="config-section">
-                            <h3>Sicurezza e connettività</h3>
-                            <ul>
-                                <li>Firewall per la pubblicazione sicura dei servizi esposti (web e posta) ospitati nell’edificio <strong>B</strong>.</li>
-                                <li>Access Point Wi‑Fi previsto nell’edificio <strong>A</strong> per la copertura wireless.</li>
-                                <li>Server di backup collocato nell’edificio <strong>C</strong> (buona interconnessione, carico utenti moderato, assenza di Wi‑Fi).</li>
-                            </ul>
+                            <h3>Contesto aziendale e sedi</h3>
+                            <p>L’azienda Amazin.com è organizzata in 5 edifici con le seguenti caratteristiche:</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Edificio</th>
+                                        <th>Num. utenti</th>
+                                        <th>Copertura Wi‑Fi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>A</td><td>30</td><td>Sì</td></tr>
+                                    <tr><td>B</td><td>40</td><td>No</td></tr>
+                                    <tr><td>C</td><td>40</td><td>No</td></tr>
+                                    <tr><td>D</td><td>150</td><td>No</td></tr>
+                                    <tr><td>E</td><td>50</td><td>No</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -200,6 +182,30 @@
                                 <i class="fas fa-desktop"></i>
                                 <span>PC Client</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 2rem;">
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Topologia e routing</h3>
+                            <ul>
+                                <li>Topologia a stella tra A, B, C, D con tratto a bus D–E.</li>
+                                <li>Accesso alla rete esterna gestito nell’edificio <strong>B</strong>.</li>
+                                <li>Ogni edificio è dotato di un router; collegamenti inter‑sede in <strong>fibra ottica</strong>.</li>
+                                <li>Protocollo di routing interno: <strong>RIP</strong>, adeguato alle dimensioni dell’infrastruttura.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Sicurezza e connettività</h3>
+                            <ul>
+                                <li>Firewall per gestire l’accesso ai servizi pubblici (web e posta) ospitati in <strong>B</strong>.</li>
+                                <li>Access Point Wi‑Fi nell’edificio <strong>A</strong> per la copertura wireless.</li>
+                                <li>Server di <strong>backup</strong> in <strong>C</strong> (elevata interconnessione, carico moderato, assenza Wi‑Fi).</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

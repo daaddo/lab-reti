@@ -381,4 +381,18 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('   Home/End: First/Last slide');
     console.log('   Escape: Toggle fullscreen');
     console.log('   Ctrl+P: Print to PDF');
+
+    // Position navigation below the print instructions memo
+    function positionNavigationBelowMemo() {
+        const memo = document.querySelector('.print-instructions');
+        const nav = document.querySelector('.navigation');
+        if (!memo || !nav) return;
+        const memoRect = memo.getBoundingClientRect();
+        const offset = 12; // px spacing below memo
+        nav.style.top = `${memoRect.bottom + offset}px`;
+        nav.style.right = '1rem';
+    }
+
+    positionNavigationBelowMemo();
+    window.addEventListener('resize', positionNavigationBelowMemo);
 }); 
