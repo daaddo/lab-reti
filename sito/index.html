@@ -188,7 +188,7 @@
                 
                 <div class="topology-image">
                     <img src="images/topologia.png" alt="Topologia di rete Amazin.com">
-                </div>
+                        </div>
 
                 <div class="two-column">
                     <div class="column">
@@ -697,6 +697,925 @@ ip name-server 192.168.5.2</code></pre>
                 <span class="slide-number">14</span>
             </div>
         </section>
+
+        <!-- Slide 15: Configurazione Server Backup -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Backup - Edificio C</h3>
+                        <span class="config-type">IP: 192.168.5.3</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.5.0/24<br>
+                    <strong>IP Server:</strong> 192.168.5.3<br>
+                    <strong>Gateway:</strong> 192.168.5.1<br>
+                    <strong>Broadcast:</strong> 192.168.5.255</p>
+                    <p>Configurazione su macchina reale:</p>
+                    <div class="code-block">
+                        <pre><code>~# sudo nano /etc/network/interfaces
+#iface enp0s3 inet dhcp
+
+iface enp0s3 inet static
+address 192.168.5.3
+netmask 255.255.255.0
+network 192.168.5.0
+broadcast 192.168.5.255
+gateway 192.168.5.1
+
+~# sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">15</span>
+            </div>
+        </section>
+
+        <!-- Slide 16: Configurazione Server Web -->
+        <section class="slide" data-slide="16">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Web - Edificio B (DMZ)</h3>
+                        <span class="config-type">IP: 192.168.10.4</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.10.0/24<br>
+                    <strong>IP Server:</strong> 192.168.10.4<br>
+                    <strong>Gateway:</strong> 192.168.10.1<br>
+                    <strong>Dominio:</strong> www.amazin.com</p>
+                    <div class="code-block">
+                        <pre><code>~# sudo nano /etc/network/interfaces
+
+iface enp0s3 inet static
+address 192.168.10.4
+netmask 255.255.255.0
+network 192.168.10.0
+broadcast 192.168.10.255
+gateway 192.168.10.1</code></pre>
+                    </div>
+                    <p>Innanzitutto aggiungiamo l'ip e dominio a /etc/hosts inserendo questa riga</p>
+                    <div class="code-block">
+                        <pre><code>127.0.0.1 www.amazin.com</code></pre>
+                    </div>
+                    <p>Poi installiamo apache2, configurandolo per gestire le richieste, la configurazione si trova in <strong>etc/apache2/apache2.conf</strong></p>
+                    <p>Nel file <strong>/etc/apache2/sites-available/000-default.conf</strong> aggiungiamo le righe:</p>
+                    <div class="code-block">
+                        <pre><code>ServerName www.amazin.com
+UseCanonicalName Off</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">16</span>
+            </div>
+        </section>
+
+        <!-- Slide 17: Configurazione Server Web - Permessi e Log -->
+        <section class="slide" data-slide="17">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Web - Permessi e Log</h3>
+                        <span class="config-type">Apache2 Configuration</span>
+                    </div>
+                    <p>Ci creiamo una cartella per ospitare il sito in: <strong>/var/www/amazin.com/it</strong></p>
+                    <p>Per la sicurezza del server possiamo gestire i permessi in questo modo:</p>
+                    <p>Nella cartella <strong>"/var/www/amazin.com/it/"</strong> impostiamo i permessi in questo modo:</p>
+                    <p>L'owner delle cartelle nella directory a 7 (tutti i permessi), il gruppo e tutti gli altri a 5 (lettura ed esecuzione) <strong>755</strong></p>
+                    <p>Mentre per tutti i file l'accesso dell'admin è 6 (scrittura e lettura), per il gruppo e gli altri 4 (sola lettura) <strong>644</strong></p>
+                    <p>In fine impostiamo l'admin come proprietario della cartella /var/www/amazin.com</p>
+                    <p>Sempre ai fini della sicurezza del sito possiamo configurare i log di apache2. Creiamo una cartella per i log in <strong>/var/log/apache2/amazin.com</strong></p>
+                    <p>Cambiamo il proprietario della cartella /var/log/apache2/amazin.com</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">17</span>
+            </div>
+        </section>
+
+        <!-- Slide 18: Configurazione Server Web - VirtualHost -->
+        <section class="slide" data-slide="18">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Web - VirtualHost</h3>
+                        <span class="config-type">Apache2 VirtualHost</span>
+                    </div>
+                    <p>Creiamo un file che crea i log <strong>amazin.com.conf</strong>. Intera configurazione del file:</p>
+                    <div class="code-block">
+                        <pre><code><VirtualHost *:80>
+ServerAdmin davide@amazin.com
+ServerName amazin.com
+ServerAlias www.amazin.com
+
+DocumentRoot /var/www/amazin.com
+ErrorLog ${APACHE_LOG_DIR}/amazin.com/error.log
+CustomLog ${APACHE_LOG_DIR}/amazin.com/access.log combined
+
+<Directory /var/www/amazin.com>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+</VirtualHost></code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>sudo a2ensite amazin.com.conf
+sudo systemctl reload apache2
+sudo systemctl restart apache2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">18</span>
+            </div>
+        </section>
+
+        <!-- Slide 19: Configurazione Server Mail - Rete e Access -->
+        <section class="slide" data-slide="19">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Mail - Edificio B (DMZ)</h3>
+                        <span class="config-type">IP: 192.168.10.2</span>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>~# nano /etc/network/interfaces
+#iface enp0s3 inet dhcp
+
+iface enp0s3 inet static
+address 192.168.10.2
+netmask 255.255.255.0
+network 192.168.10.0
+broadcast 192.168.10.255
+gateway 192.168.10.1</code></pre>
+                    </div>
+                    <p>Ora impostiamo i permessi ed i controlli per i client che si connettono al server di posta in <strong>/etc/mail/access</strong></p>
+                    <div class="code-block">
+                        <pre><code>Connect:192.168
+GreetPause:192.168
+ClientRate:192.168
+ClientConn:192.168
+FREE.STREALTH.MAILER@ 550
+amazin.com RELAY
+192.168 RELAY</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">19</span>
+            </div>
+        </section>
+
+        <!-- Slide 20: Configurazione Server Mail - Alias -->
+        <section class="slide" data-slide="20">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Mail - Alias</h3>
+                        <span class="config-type">Sendmail</span>
+                    </div>
+                    <p>Alias nel file <strong>/etc/mail/aliases</strong></p>
+                    <div class="code-block">
+                        <pre><code>postmaster: davide
+admin: davide,matteo
+dmz: admindmz
+retea: adminretea
+reteb: adminreteb
+retec: adminretec
+reted: adminreted
+retee: adminretee
+admindmz: matteo
+adminretea: orro, antropova
+adminreteb: matteo, giannelli
+adminretec: davide, sylla
+adminreted: matteo, salvadori
+adminretee: dag, davide</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">20</span>
+            </div>
+        </section>
+
+        <!-- Slide 21: Configurazione Server Mail - Domini e Sendmail -->
+        <section class="slide" data-slide="21">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Mail - Domini e Relay</h3>
+                        <span class="config-type">Sendmail</span>
+                    </div>
+                    <p>Configuriamo nomi di dominio gestiti dal server <strong>/etc/mail/local-host-names</strong></p>
+                    <div class="code-block">
+                        <pre><code>localhost
+amazin.com
+mail.amazin.com
+dmz.amazin.com
+retea.amazin.com
+reteb.amazin.com
+retec.amazin.com
+reted.amazin.com
+retee.amazin.com</code></pre>
+                    </div>
+                    <p>Configuriamo <strong>/etc/mail/sendmail.mc</strong></p>
+                    <div class="code-block">
+                        <pre><code>FEATURE(`relay_entire_domain')dnl</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">21</span>
+            </div>
+        </section>
+
+        <!-- Slide 22: Configurazione Server Mail - Utenti e VirtUserTable -->
+        <section class="slide" data-slide="22">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Mail - Utenti Virtuali</h3>
+                        <span class="config-type">Sendmail</span>
+                    </div>
+                    <p>Creazione di utenti di sistema</p>
+                    <div class="code-block">
+                        <pre><code>useradd --create-home -s /sbin/nologin davide; passwd admin32
+useradd --create-home -s /sbin/nologin matteo; passwd admin12</code></pre>
+                    </div>
+                    <p>Configuriamo la tabella degli utenti virtuali <strong>/etc/mail/virtusertable</strong></p>
+                    <div class="code-block">
+                        <pre><code>root@amazin.com root
+postmaster@amazin.com postmaster
+admin@amazin.com admin
+dmz@amazin.com dmz
+retea@amazin.com retea
+reteb@amazin.com reteb
+retec@amazin.com retec
+reted@amazin.com reted
+retee@amazin.com retee
+davide@amazin.com davide
+matteo@amazin.com matteo</code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>cd /etc/mail
+make
+service sendmail restart</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">22</span>
+            </div>
+        </section>
+
+        <!-- Slide 23: Configurazione DNS2 Interno Master -->
+        <section class="slide" data-slide="23">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 Interno Master - Edificio C</h3>
+                        <span class="config-type">IP: 192.168.5.2</span>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>~# sudo nano /etc/network/interfaces
+
+iface enp0s3 inet static
+address 192.168.5.2
+netmask 255.255.255.0
+network 192.168.5.0
+broadcast 192.168.5.255
+gateway 192.168.5.1
+
+~# sudo systemctl restart networking</code></pre>
+                    </div>
+                    <p><strong>resolv.conf</strong></p>
+                    <div class="code-block">
+                        <pre><code>domain amazin.com
+
+nameserver 192.168.5.2
+nameserver 192.168.10.3</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">23</span>
+            </div>
+        </section>
+
+        <!-- Slide 24: Configurazione DNS2 - named.conf ACL e Options -->
+        <section class="slide" data-slide="24">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 Interno - named.conf</h3>
+                        <span class="config-type">Bind9 Configuration</span>
+                    </div>
+                    <p><strong>named.conf - ACL e Options</strong></p>
+                    <div class="code-block">
+                        <pre><code>acl localhost {
+    127.0.0.1;
+};
+
+acl dmz {
+    192.168.10.0/24;
+};
+
+acl trusted-networks {
+    192.168.1.0/24;
+    192.168.2.0/24;
+    192.168.3.0/24;
+    192.168.4.0/24;
+    192.168.5.0/24;
+};
+
+options {
+    directory "/var/cache/bind";
+    dnssec-validation auto;
+    auth-nxdomain no;
+    version "Not disclosed";
+    notify yes;
+    allow-transfer { none; };
+    allow-query { localhost; trusted-networks; };
+    forwarders {
+        1.1.1.1;
+    };
+    recursion yes;
+    max-cache-size 512M;
+    query-timeout 10;
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">24</span>
+            </div>
+        </section>
+
+        <!-- Slide 25: Configurazione DNS2 - Zone DMZ e Edifici -->
+        <section class="slide" data-slide="25">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 Interno - Zone Configuration</h3>
+                        <span class="config-type">Bind9 Zones</span>
+                    </div>
+                    <p><strong>named.conf - Zone Master</strong></p>
+                    <div class="code-block">
+                        <pre><code>// DMZ
+zone "dmz.amazin.com" {
+    type master;
+    file "/etc/bind/zones/dmz.amazin.com.db";
+};
+
+zone "10.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/10.168.192.in-addr.arpa.db";
+};
+
+// Edificio A
+zone "edificioa.amazin.com" {
+    type master;
+    file "/etc/bind/zones/edificioa.amazin.com.db";
+};
+
+zone "3.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/3.168.192.in-addr.arpa.db";
+};
+
+// Edificio B
+zone "edificiob.amazin.com" {
+    type master;
+    file "/etc/bind/zones/edificiob.amazin.com.db";
+};
+
+zone "2.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/2.168.192.in-addr.arpa.db";
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">25</span>
+            </div>
+        </section>
+
+        <!-- Slide 26: Configurazione DNS2 - Zone Edifici C, D, E -->
+        <section class="slide" data-slide="26">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 Interno - Zone Configuration</h3>
+                        <span class="config-type">Bind9 Zones</span>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>// Edificio C
+zone "edificioc.amazin.com" {
+    type master;
+    file "/etc/bind/zones/edificioc.amazin.com.db";
+};
+
+zone "5.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/5.168.192.in-addr.arpa.db";
+    allow-transfer { none };
+};
+
+// Edificio D
+zone "edificiod.amazin.com" {
+    type master;
+    file "/etc/bind/zones/edificiod.amazin.com.db";
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/1.168.192.in-addr.arpa.db";
+};
+
+// Edificio E
+zone "edificioe.amazin.com" {
+    type master;
+    file "/etc/bind/zones/edificioe.amazin.com.db";
+};
+
+zone "4.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/4.168.192.in-addr.arpa.db";
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">26</span>
+            </div>
+        </section>
+
+        <!-- Slide 27: DNS2 Zone Files - DMZ -->
+        <section class="slide" data-slide="27">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File DMZ</h3>
+                        <span class="config-type">dmz.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/dmz.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025102001  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+@       IN NS dns1.dmz.amazin.com.
+@       IN NS dmz.amazin.com.
+@       IN MX 10 mail.amazin.com.
+
+dns1    IN A 192.168.10.3
+nagios  IN A 192.168.10.30
+web     IN A 192.168.10.4
+mail    IN A 192.168.10.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">27</span>
+            </div>
+        </section>
+
+        <!-- Slide 28: DNS2 Zone Files - DMZ Reverse -->
+        <section class="slide" data-slide="28">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File DMZ Reverse</h3>
+                        <span class="config-type">10.168.192.in-addr.arpa.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/10.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025102001  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+@   IN NS dns1.dmz.amazin.com.
+@   IN NS dmz.amazin.com.
+
+30  IN PTR nagios.dmz.amazin.com.
+4   IN PTR web.dmz.amazin.com.
+3   IN PTR dns1.dmz.amazin.com.
+2   IN PTR mail.dmz.amazin.com.</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">28</span>
+            </div>
+        </section>
+
+        <!-- Slide 29: DNS2 Zone Files - Edificio A -->
+        <section class="slide" data-slide="29">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File Edificio A</h3>
+                        <span class="config-type">edificioa.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/edificioa.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025102001  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+        IN NS dns1.dmz.amazin.com.
+
+gw      IN A 192.168.3.1
+h.3.10  IN A 192.168.3.10
+h.3.11  IN A 192.168.3.11</code></pre>
+                    </div>
+                    <p><strong>/etc/bind/zones/3.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025102001  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+    IN NS dns1.dmz.amazin.com.
+
+1   IN PTR gateway
+10  IN PTR h.3.10
+11  IN PTR h.3.11</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">29</span>
+            </div>
+        </section>
+
+        <!-- Slide 30: DNS2 Zone Files - Edificio B -->
+        <section class="slide" data-slide="30">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File Edificio B</h3>
+                        <span class="config-type">edificiob.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/edificiob.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+        IN NS dns1.dmz.amazin.com.
+
+gw      IN A 192.168.2.1
+H.2.10  IN A 192.168.2.10
+H.2.11  IN A 192.168.2.11</code></pre>
+                    </div>
+                    <p><strong>/etc/bind/zones/2.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+    IN NS dns1.dmz.amazin.com.
+
+1   IN PTR gateway
+10  IN PTR H.2.10
+11  IN PTR H.2.11</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">30</span>
+            </div>
+        </section>
+
+        <!-- Slide 31: DNS2 Zone Files - Edificio C -->
+        <section class="slide" data-slide="31">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File Edificio C</h3>
+                        <span class="config-type">edificioc.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/edificioc.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+        IN NS dns1.dmz.amazin.com.
+
+gw      IN A 192.168.5.1
+H.5.10  IN A 192.168.5.10
+H.5.11  IN A 192.168.5.11</code></pre>
+                    </div>
+                    <p><strong>/etc/bind/zones/5.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+    IN NS dns1.dmz.amazin.com.
+
+1   IN PTR gateway
+10  IN PTR H.5.10
+11  IN PTR H.5.11</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">31</span>
+            </div>
+        </section>
+
+        <!-- Slide 32: DNS2 Zone Files - Edificio D -->
+        <section class="slide" data-slide="32">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File Edificio D</h3>
+                        <span class="config-type">edificiod.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/edificiod.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+        IN NS dns1.dmz.amazin.com.
+
+gw      IN A 192.168.1.1
+H.1.10  IN A 192.168.1.10
+H.1.11  IN A 192.168.1.11</code></pre>
+                    </div>
+                    <p><strong>/etc/bind/zones/1.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+    IN NS dns1.dmz.amazin.com.
+
+1   IN PTR gateway
+10  IN PTR H.1.10
+11  IN PTR H.1.11</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">32</span>
+            </div>
+        </section>
+
+        <!-- Slide 33: DNS2 Zone Files - Edificio E -->
+        <section class="slide" data-slide="33">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS2 - Zone File Edificio E</h3>
+                        <span class="config-type">edificioe.amazin.com.db</span>
+                    </div>
+                    <p><strong>/etc/bind/zones/edificioe.amazin.com.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+        IN NS dns1.dmz.amazin.com.
+
+gw      IN A 192.168.4.1
+H.4.10  IN A 192.168.4.10
+H.4.11  IN A 192.168.4.11</code></pre>
+                    </div>
+                    <p><strong>/etc/bind/zones/4.168.192.in-addr.arpa.db</strong></p>
+                    <div class="code-block">
+                        <pre><code>$TTL 86400
+@ IN SOA dns1.dmz.amazin.com. admin.amazin.com. (
+    2025060202  ; Serial
+    3600        ; Refresh
+    1800        ; Retry
+    1209600     ; Expire
+    86400       ; Minimum TTL
+)
+
+    IN NS dns1.dmz.amazin.com.
+
+1   IN PTR gateway
+10  IN PTR H.4.10
+11  IN PTR H.4.11</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">33</span>
+            </div>
+        </section>
+
+        <!-- Slide 34: Configurazione Server DNS Esterno Slave -->
+        <section class="slide" data-slide="34">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS1 Esterno Slave - Edificio B (DMZ)</h3>
+                        <span class="config-type">IP: 192.168.10.3</span>
+                    </div>
+                    <div class="code-block">
+                        <pre><code>~# sudo nano /etc/network/interfaces
+
+iface enp0s3 inet static
+address 192.168.10.3
+netmask 255.255.255.0
+network 192.168.10.0
+broadcast 192.168.10.255
+gateway 192.168.10.1
+
+~# sudo systemctl restart networking</code></pre>
+                    </div>
+                    <p><strong>resolv.conf</strong></p>
+                    <div class="code-block">
+                        <pre><code>domain amazin.com
+
+nameserver 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">34</span>
+            </div>
+        </section>
+
+        <!-- Slide 35: Configurazione DNS1 - named.conf -->
+        <section class="slide" data-slide="35">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>DNS1 Esterno - named.conf</h3>
+                        <span class="config-type">Bind9 Configuration</span>
+                    </div>
+                    <p><strong>named.conf</strong></p>
+                    <div class="code-block">
+                        <pre><code>options {
+    directory "/var/cache/bind";
+    dnssec-validation auto;
+    auth-nxdomain no;
+    version "Not disclosed";
+    notify yes;
+    allow-transfer { none; };
+    allow-query { any; };
+    recursion no;
+};
+
+// DNS1 è slave di DNS2
+zone "dmz.amazin.com" {
+    type slave;
+    file "/etc/bind/zones/dmz.amazin.com.bk";
+    masters { 192.168.5.2; };
+};
+
+// reverse mapping per amazin.com
+zone "10.168.192.in-addr.arpa" {
+    type slave;
+    file "/etc/bind/zones/5.168.192.in-addr.arpa.bk";
+    masters { 192.168.5.2; };
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">35</span>
+            </div>
+        </section>
+
+        <!-- Slide 36: Configurazione Server Nagios -->
+        <section class="slide" data-slide="36">
+            <div class="slide-content">
+                <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Server Nagios - Edificio B (DMZ)</h3>
+                        <span class="config-type">IP: 192.168.10.30</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.10.0/24<br>
+                    <strong>IP Server:</strong> 192.168.10.30<br>
+                    <strong>Gateway:</strong> 192.168.10.1<br>
+                    <strong>Servizio:</strong> Monitoraggio Rete</p>
+                    <div class="code-block">
+                        <pre><code>~# sudo nano /etc/network/interfaces
+
+iface enp0s3 inet static
+address 192.168.10.30
+netmask 255.255.255.0
+network 192.168.10.0
+broadcast 192.168.10.255
+gateway 192.168.10.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+~# sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">36</span>
+            </div>
+        </section>
     </div>
 
     <!-- Navigation Controls -->
@@ -705,7 +1624,7 @@ ip name-server 192.168.5.2</code></pre>
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">14</span>
+            <span id="current-slide">1</span> / <span id="total-slides">36</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
