@@ -33,51 +33,51 @@
             </div>
         </section>
 
-        <!-- Slide 2: Indice -->
+        <!-- Slide 2: Indice - Parte 1 -->
         <section class="slide" data-slide="2">
             <div class="slide-content">
-                <h2><i class="fas fa-list"></i> Indice</h2>
+                <h2><i class="fas fa-list"></i> Indice - Parte 1</h2>
                 <div class="index-grid">
-                    <div class="index-item">
-                        <div class="index-number">01</div>
-                        <div class="index-text">
-                            <h3>Introduzione</h3>
-                            <p>Obiettivi e panoramica del progetto</p>
-                        </div>
-                    </div>
-                    <div class="index-item">
-                        <div class="index-number">02</div>
-                        <div class="index-text">
-                            <h3>Architettura di Rete</h3>
-                            <p>Progettazione della topologia</p>
-                        </div>
-                    </div>
-                    <div class="index-item">
-                        <div class="index-number">03</div>
-                        <div class="index-text">
-                            <h3>Dispositivi di Rete</h3>
-                            <p>Modem, router, switch e configurazioni</p>
-                        </div>
-                    </div>
-                    <div class="index-item">
+                    <div class="index-item" onclick="window.presentation.goToSlide(4)" style="cursor: pointer;">
                         <div class="index-number">04</div>
                         <div class="index-text">
-                            <h3>Sicurezza</h3>
-                            <p>Firewall e protezione degli host</p>
+                            <h3>Introduzione</h3>
+                            <p>Requisiti servizi e indirizzamento</p>
                         </div>
                     </div>
-                    <div class="index-item">
+                    <div class="index-item" onclick="window.presentation.goToSlide(5)" style="cursor: pointer;">
                         <div class="index-number">05</div>
                         <div class="index-text">
-                            <h3>Implementazione</h3>
-                            <p>Configurazione pratica e testing</p>
+                            <h3>Architettura di Rete</h3>
+                            <p>Topologia e server di rete</p>
                         </div>
                     </div>
-                    <div class="index-item">
+                    <div class="index-item" onclick="window.presentation.goToSlide(6)" style="cursor: pointer;">
                         <div class="index-number">06</div>
                         <div class="index-text">
-                            <h3>Conclusioni</h3>
-                            <p>Risultati e sviluppi futuri</p>
+                            <h3>Backbone e Interconnessioni</h3>
+                            <p>Collegamenti tra edifici</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(7)" style="cursor: pointer;">
+                        <div class="index-number">07-09</div>
+                        <div class="index-text">
+                            <h3>Configurazione Host</h3>
+                            <p>Host degli edifici A, B, C, D, E, DMZ</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(10)" style="cursor: pointer;">
+                        <div class="index-number">10-15</div>
+                        <div class="index-text">
+                            <h3>Configurazione Router</h3>
+                            <p>Router Cisco IOS per tutti gli edifici</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(16)" style="cursor: pointer;">
+                        <div class="index-number">16</div>
+                        <div class="index-text">
+                            <h3>Server Backup</h3>
+                            <p>Configurazione server backup Edificio C</p>
                         </div>
                     </div>
                 </div>
@@ -87,8 +87,62 @@
             </div>
         </section>
 
-        <!-- Slide 3: Introduzione -->
+        <!-- Slide 3: Indice - Parte 2 -->
         <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2><i class="fas fa-list"></i> Indice - Parte 2</h2>
+                <div class="index-grid">
+                    <div class="index-item" onclick="window.presentation.goToSlide(17)" style="cursor: pointer;">
+                        <div class="index-number">17-19</div>
+                        <div class="index-text">
+                            <h3>Server Web</h3>
+                            <p>Apache2, permessi e VirtualHost</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(20)" style="cursor: pointer;">
+                        <div class="index-number">20-23</div>
+                        <div class="index-text">
+                            <h3>Server Mail</h3>
+                            <p>Sendmail, alias, domini e utenti virtuali</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(24)" style="cursor: pointer;">
+                        <div class="index-number">24-34</div>
+                        <div class="index-text">
+                            <h3>DNS2 Interno Master</h3>
+                            <p>Bind9 e zone files per tutti gli edifici</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(35)" style="cursor: pointer;">
+                        <div class="index-number">35-36</div>
+                        <div class="index-text">
+                            <h3>DNS1 Esterno Slave</h3>
+                            <p>DNS slave nella DMZ</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(37)" style="cursor: pointer;">
+                        <div class="index-number">37</div>
+                        <div class="index-text">
+                            <h3>Server Nagios</h3>
+                            <p>Monitoraggio rete</p>
+                        </div>
+                    </div>
+                    <div class="index-item" onclick="window.presentation.goToSlide(38)" style="cursor: pointer;">
+                        <div class="index-number">38-41</div>
+                        <div class="index-text">
+                            <h3>Firewall</h3>
+                            <p>iptables interno ed esterno, NAT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">3</span>
+            </div>
+        </section>
+
+        <!-- Slide 4: Introduzione -->
+        <section class="slide" data-slide="4">
             <div class="slide-content">
                 <h2><i class="fas fa-bullseye"></i> Introduzione</h2>
 
@@ -177,12 +231,12 @@
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">3</span>
+                <span class="slide-number">4</span>
             </div>
         </section>
 
-        <!-- Slide 4: Architettura di Rete -->
-        <section class="slide" data-slide="4">
+        <!-- Slide 5: Architettura di Rete -->
+        <section class="slide" data-slide="5">
             <div class="slide-content">
                 <h2><i class="fas fa-project-diagram"></i> Architettura di Rete</h2>
                 
@@ -227,12 +281,12 @@
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">4</span>
+                <span class="slide-number">5</span>
             </div>
         </section>
 
-        <!-- Slide 5: Backbone e Interconnessioni -->
-        <section class="slide" data-slide="5">
+        <!-- Slide 6: Backbone e Interconnessioni -->
+        <section class="slide" data-slide="6">
             <div class="slide-content">
                 <h2><i class="fas fa-network-wired"></i> Backbone e Interconnessioni</h2>
                 
@@ -265,12 +319,12 @@
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">5</span>
+                <span class="slide-number">6</span>
             </div>
         </section>
 
-        <!-- Slide 6: Configurazione Host - Edifici A e B -->
-        <section class="slide" data-slide="6">
+        <!-- Slide 7: Configurazione Host - Edifici A e B -->
+        <section class="slide" data-slide="7">
             <div class="slide-content">
                 <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
                 
@@ -316,12 +370,12 @@ sudo systemctl restart networking</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">6</span>
+                <span class="slide-number">7</span>
             </div>
         </section>
 
-        <!-- Slide 7: Configurazione Host - Edifici C e D -->
-        <section class="slide" data-slide="7">
+        <!-- Slide 8: Configurazione Host - Edifici C e D -->
+        <section class="slide" data-slide="8">
             <div class="slide-content">
                 <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
                 
@@ -370,12 +424,12 @@ sudo systemctl restart networking</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">7</span>
+                <span class="slide-number">8</span>
             </div>
         </section>
 
-        <!-- Slide 8: Configurazione Host - Edifici E e B DMZ -->
-        <section class="slide" data-slide="8">
+        <!-- Slide 9: Configurazione Host - Edifici E e B DMZ -->
+        <section class="slide" data-slide="9">
             <div class="slide-content">
                 <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
                 
@@ -424,12 +478,12 @@ sudo systemctl restart networking</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">8</span>
+                <span class="slide-number">9</span>
             </div>
         </section>
 
-        <!-- Slide 9: Configurazione Router - Edificio A -->
-        <section class="slide" data-slide="9">
+        <!-- Slide 10: Configurazione Router - Edificio A -->
+        <section class="slide" data-slide="10">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -465,12 +519,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">9</span>
+                <span class="slide-number">10</span>
             </div>
         </section>
 
-        <!-- Slide 10: Configurazione Router - Edificio B -->
-        <section class="slide" data-slide="10">
+        <!-- Slide 11: Configurazione Router - Edificio B -->
+        <section class="slide" data-slide="11">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -518,12 +572,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">10</span>
+                <span class="slide-number">11</span>
             </div>
         </section>
 
-        <!-- Slide 11: Configurazione Router - Edificio C -->
-        <section class="slide" data-slide="11">
+        <!-- Slide 12: Configurazione Router - Edificio C -->
+        <section class="slide" data-slide="12">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -563,12 +617,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">11</span>
+                <span class="slide-number">12</span>
             </div>
         </section>
 
-        <!-- Slide 12: Configurazione Router - Edificio D -->
-        <section class="slide" data-slide="12">
+        <!-- Slide 13: Configurazione Router - Edificio D -->
+        <section class="slide" data-slide="13">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -612,12 +666,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">12</span>
+                <span class="slide-number">13</span>
             </div>
         </section>
 
-        <!-- Slide 13: Configurazione Router - Edificio E -->
-        <section class="slide" data-slide="13">
+        <!-- Slide 14: Configurazione Router - Edificio E -->
+        <section class="slide" data-slide="14">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -653,12 +707,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">13</span>
+                <span class="slide-number">14</span>
             </div>
         </section>
 
-        <!-- Slide 14: Configurazione Router - Edificio B DMZ -->
-        <section class="slide" data-slide="14">
+        <!-- Slide 15: Configurazione Router - Edificio B DMZ -->
+        <section class="slide" data-slide="15">
             <div class="slide-content">
                 <h2><i class="fas fa-router"></i> Configurazione Router</h2>
                 
@@ -694,12 +748,12 @@ ip name-server 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">14</span>
+                <span class="slide-number">15</span>
             </div>
         </section>
 
-        <!-- Slide 15: Configurazione Server Backup -->
-        <section class="slide" data-slide="15">
+        <!-- Slide 16: Configurazione Server Backup -->
+        <section class="slide" data-slide="16">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -729,12 +783,12 @@ gateway 192.168.5.1
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">15</span>
+                <span class="slide-number">16</span>
             </div>
         </section>
 
-        <!-- Slide 16: Configurazione Server Web -->
-        <section class="slide" data-slide="16">
+        <!-- Slide 17: Configurazione Server Web -->
+        <section class="slide" data-slide="17">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -770,12 +824,12 @@ UseCanonicalName Off</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">16</span>
+                <span class="slide-number">17</span>
             </div>
         </section>
 
-        <!-- Slide 17: Configurazione Server Web - Permessi e Log -->
-        <section class="slide" data-slide="17">
+        <!-- Slide 18: Configurazione Server Web - Permessi e Log -->
+        <section class="slide" data-slide="18">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -795,12 +849,12 @@ UseCanonicalName Off</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">17</span>
+                <span class="slide-number">18</span>
             </div>
         </section>
 
-        <!-- Slide 18: Configurazione Server Web - VirtualHost -->
-        <section class="slide" data-slide="18">
+        <!-- Slide 19: Configurazione Server Web - VirtualHost -->
+        <section class="slide" data-slide="19">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -835,12 +889,12 @@ sudo systemctl restart apache2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">18</span>
+                <span class="slide-number">19</span>
             </div>
         </section>
 
-        <!-- Slide 19: Configurazione Server Mail - Rete e Access -->
-        <section class="slide" data-slide="19">
+        <!-- Slide 20: Configurazione Server Mail - Rete e Access -->
+        <section class="slide" data-slide="20">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -873,12 +927,12 @@ amazin.com RELAY
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">19</span>
+                <span class="slide-number">20</span>
             </div>
         </section>
 
-        <!-- Slide 20: Configurazione Server Mail - Alias -->
-        <section class="slide" data-slide="20">
+        <!-- Slide 21: Configurazione Server Mail - Alias -->
+        <section class="slide" data-slide="21">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -907,12 +961,12 @@ adminretee: dag, davide</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">20</span>
+                <span class="slide-number">21</span>
             </div>
         </section>
 
-        <!-- Slide 21: Configurazione Server Mail - Domini e Sendmail -->
-        <section class="slide" data-slide="21">
+        <!-- Slide 22: Configurazione Server Mail - Domini e Sendmail -->
+        <section class="slide" data-slide="22">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -940,12 +994,12 @@ retee.amazin.com</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">21</span>
+                <span class="slide-number">22</span>
             </div>
         </section>
 
-        <!-- Slide 22: Configurazione Server Mail - Utenti e VirtUserTable -->
-        <section class="slide" data-slide="22">
+        <!-- Slide 23: Configurazione Server Mail - Utenti e VirtUserTable -->
+        <section class="slide" data-slide="23">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -981,12 +1035,12 @@ service sendmail restart</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">22</span>
+                <span class="slide-number">23</span>
             </div>
         </section>
 
-        <!-- Slide 23: Configurazione DNS2 Interno Master -->
-        <section class="slide" data-slide="23">
+        <!-- Slide 24: Configurazione DNS2 Interno Master -->
+        <section class="slide" data-slide="24">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1017,12 +1071,12 @@ nameserver 192.168.10.3</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">23</span>
+                <span class="slide-number">24</span>
             </div>
         </section>
 
-        <!-- Slide 24: Configurazione DNS2 - named.conf ACL e Options -->
-        <section class="slide" data-slide="24">
+        <!-- Slide 25: Configurazione DNS2 - named.conf ACL e Options -->
+        <section class="slide" data-slide="25">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1068,12 +1122,12 @@ options {
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">24</span>
+                <span class="slide-number">25</span>
             </div>
         </section>
 
-        <!-- Slide 25: Configurazione DNS2 - Zone DMZ e Edifici -->
-        <section class="slide" data-slide="25">
+        <!-- Slide 26: Configurazione DNS2 - Zone DMZ e Edifici -->
+        <section class="slide" data-slide="26">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1120,12 +1174,12 @@ zone "2.168.192.in-addr.arpa" {
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">25</span>
+                <span class="slide-number">26</span>
             </div>
         </section>
 
-        <!-- Slide 26: Configurazione DNS2 - Zone Edifici C, D, E -->
-        <section class="slide" data-slide="26">
+        <!-- Slide 27: Configurazione DNS2 - Zone Edifici C, D, E -->
+        <section class="slide" data-slide="27">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1172,12 +1226,12 @@ zone "4.168.192.in-addr.arpa" {
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">26</span>
+                <span class="slide-number">27</span>
             </div>
         </section>
 
-        <!-- Slide 27: DNS2 Zone Files - DMZ -->
-        <section class="slide" data-slide="27">
+        <!-- Slide 28: DNS2 Zone Files - DMZ -->
+        <section class="slide" data-slide="28">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1209,12 +1263,12 @@ mail    IN A 192.168.10.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">27</span>
+                <span class="slide-number">28</span>
             </div>
         </section>
 
-        <!-- Slide 28: DNS2 Zone Files - DMZ Reverse -->
-        <section class="slide" data-slide="28">
+        <!-- Slide 29: DNS2 Zone Files - DMZ Reverse -->
+        <section class="slide" data-slide="29">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1245,12 +1299,12 @@ mail    IN A 192.168.10.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">28</span>
+                <span class="slide-number">29</span>
             </div>
         </section>
 
-        <!-- Slide 29: DNS2 Zone Files - Edificio A -->
-        <section class="slide" data-slide="29">
+        <!-- Slide 30: DNS2 Zone Files - Edificio A -->
+        <section class="slide" data-slide="30">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1296,12 +1350,12 @@ h.3.11  IN A 192.168.3.11</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">29</span>
+                <span class="slide-number">30</span>
             </div>
         </section>
 
-        <!-- Slide 30: DNS2 Zone Files - Edificio B -->
-        <section class="slide" data-slide="30">
+        <!-- Slide 31: DNS2 Zone Files - Edificio B -->
+        <section class="slide" data-slide="31">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1347,12 +1401,12 @@ H.2.11  IN A 192.168.2.11</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">30</span>
+                <span class="slide-number">31</span>
             </div>
         </section>
 
-        <!-- Slide 31: DNS2 Zone Files - Edificio C -->
-        <section class="slide" data-slide="31">
+        <!-- Slide 32: DNS2 Zone Files - Edificio C -->
+        <section class="slide" data-slide="32">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1398,12 +1452,12 @@ H.5.11  IN A 192.168.5.11</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">31</span>
+                <span class="slide-number">32</span>
             </div>
         </section>
 
-        <!-- Slide 32: DNS2 Zone Files - Edificio D -->
-        <section class="slide" data-slide="32">
+        <!-- Slide 33: DNS2 Zone Files - Edificio D -->
+        <section class="slide" data-slide="33">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1449,12 +1503,12 @@ H.1.11  IN A 192.168.1.11</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">32</span>
+                <span class="slide-number">33</span>
             </div>
         </section>
 
-        <!-- Slide 33: DNS2 Zone Files - Edificio E -->
-        <section class="slide" data-slide="33">
+        <!-- Slide 34: DNS2 Zone Files - Edificio E -->
+        <section class="slide" data-slide="34">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1500,12 +1554,12 @@ H.4.11  IN A 192.168.4.11</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">33</span>
+                <span class="slide-number">34</span>
             </div>
         </section>
 
-        <!-- Slide 34: Configurazione Server DNS Esterno Slave -->
-        <section class="slide" data-slide="34">
+        <!-- Slide 35: Configurazione Server DNS Esterno Slave -->
+        <section class="slide" data-slide="35">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1535,12 +1589,12 @@ nameserver 192.168.5.2</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">34</span>
+                <span class="slide-number">35</span>
             </div>
         </section>
 
-        <!-- Slide 35: Configurazione DNS1 - named.conf -->
-        <section class="slide" data-slide="35">
+        <!-- Slide 36: Configurazione DNS1 - named.conf -->
+        <section class="slide" data-slide="36">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1579,12 +1633,12 @@ zone "10.168.192.in-addr.arpa" {
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">35</span>
+                <span class="slide-number">36</span>
             </div>
         </section>
 
-        <!-- Slide 36: Configurazione Server Nagios -->
-        <section class="slide" data-slide="36">
+        <!-- Slide 37: Configurazione Server Nagios -->
+        <section class="slide" data-slide="37">
             <div class="slide-content">
                 <h2><i class="fas fa-server"></i> Configurazione Servizi</h2>
                 
@@ -1613,12 +1667,12 @@ dns-nameservers 192.168.5.2 192.168.10.3
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">36</span>
+                <span class="slide-number">37</span>
             </div>
         </section>
 
-        <!-- Slide 37: Configurazione Firewall Interno -->
-        <section class="slide" data-slide="37">
+        <!-- Slide 38: Configurazione Firewall Interno -->
+        <section class="slide" data-slide="38">
             <div class="slide-content">
                 <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
                 
@@ -1645,12 +1699,12 @@ iptables -A FORWARD -p tcp -d 192.168.5.2 --dport 53 -j ACCEPT</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">37</span>
+                <span class="slide-number">38</span>
             </div>
         </section>
 
-        <!-- Slide 38: Configurazione Firewall Interno - Regole Mail e Web -->
-        <section class="slide" data-slide="38">
+        <!-- Slide 39: Configurazione Firewall Interno - Regole Mail e Web -->
+        <section class="slide" data-slide="39">
             <div class="slide-content">
                 <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
                 
@@ -1678,12 +1732,12 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">38</span>
+                <span class="slide-number">39</span>
             </div>
         </section>
 
-        <!-- Slide 39: Configurazione Firewall Esterno -->
-        <section class="slide" data-slide="39">
+        <!-- Slide 40: Configurazione Firewall Esterno -->
+        <section class="slide" data-slide="40">
             <div class="slide-content">
                 <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
                 
@@ -1709,12 +1763,12 @@ iptables -A FORWARD -p tcp -j REJECT --reject-with tcp-reset</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">39</span>
+                <span class="slide-number">40</span>
             </div>
         </section>
 
-        <!-- Slide 40: Configurazione Firewall Esterno - NAT -->
-        <section class="slide" data-slide="40">
+        <!-- Slide 41: Configurazione Firewall Esterno - NAT -->
+        <section class="slide" data-slide="41">
             <div class="slide-content">
                 <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
                 
@@ -1734,7 +1788,7 @@ iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">40</span>
+                <span class="slide-number">41</span>
             </div>
         </section>
     </div>
@@ -1745,7 +1799,7 @@ iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE</code></pre>
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">40</span>
+            <span id="current-slide">1</span> / <span id="total-slides">41</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
