@@ -427,6 +427,276 @@ sudo systemctl restart networking</code></pre>
                 <span class="slide-number">8</span>
             </div>
         </section>
+
+        <!-- Slide 9: Configurazione Router - Edificio A -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio A</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.3.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.14/30 (verso B)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 10.0.0.14 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.3.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">9</span>
+            </div>
+        </section>
+
+        <!-- Slide 10: Configurazione Router - Edificio B -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio B</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.2.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.1/30 (C), 10.0.0.9/30 (D), 10.0.0.13/30 (A), 10.0.0.21/30 (DMZ)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/1
+ip address 10.0.0.9 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/2
+ip address 10.0.0.13 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/3
+ip address 10.0.0.21 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.2.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">10</span>
+            </div>
+        </section>
+
+        <!-- Slide 11: Configurazione Router - Edificio C -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio C</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.5.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.2/30 (verso B), 10.0.0.5/30 (verso D)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.5.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet1/1
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/2
+ip address 10.0.0.5 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.5.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">11</span>
+            </div>
+        </section>
+
+        <!-- Slide 12: Configurazione Router - Edificio D -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio D</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.1.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.6/30 (C), 10.0.0.10/30 (B), 10.0.0.18/30 (E)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 10.0.0.6 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/1
+ip address 10.0.0.10 255.255.255.252
+no shutdown
+
+interface GigabitEthernet1/2
+ip address 10.0.0.18 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.1.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">12</span>
+            </div>
+        </section>
+
+        <!-- Slide 13: Configurazione Router - Edificio E -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio E</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.4.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.17/30 (verso D)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.4.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 10.0.0.17 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.4.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">13</span>
+            </div>
+        </section>
+
+        <!-- Slide 14: Configurazione Router - Edificio B DMZ -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2><i class="fas fa-router"></i> Configurazione Router</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Router Edificio B (DMZ)</h3>
+                        <span class="config-type">Cisco IOS</span>
+                    </div>
+                    <p><strong>LAN:</strong> 192.168.10.1/24<br>
+                    <strong>WAN:</strong> 10.0.0.22/30 (verso B)<br>
+                    <strong>DNS:</strong> 192.168.5.2</p>
+                    <div class="code-block">
+                        <pre><code>enable
+configure terminal
+
+interface FastEthernet0/0
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 10.0.0.22 255.255.255.252
+no shutdown
+
+router rip
+version 2
+network 192.168.10.0
+network 10.0.0.0
+
+end
+ip domain-lookup
+ip name-server 192.168.5.2</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">14</span>
+            </div>
+        </section>
     </div>
 
     <!-- Navigation Controls -->
@@ -435,7 +705,7 @@ sudo systemctl restart networking</code></pre>
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">8</span>
+            <span id="current-slide">1</span> / <span id="total-slides">14</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
