@@ -96,22 +96,12 @@
                     <div class="column">
                         <div class="config-section">
                             <h3>Requisiti dei servizi</h3>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-envelope"></i> Posta elettronica: 1 server</li>
-                                <li><i class="fas fa-globe"></i> Web: 1 server</li>
-                                <li><i class="fas fa-server"></i> DNS: 2 server</li>
-                                <li><i class="fas fa-database"></i> Backup: 1 server</li>
-                            </ul>
+                            <p>L'infrastruttura aziendale richiede i seguenti server: <strong>1 server di posta elettronica</strong>, <strong>1 server web</strong>, <strong>2 server DNS</strong> per garantire ridondanza e <strong>1 server di backup</strong> per la protezione dei dati.</p>
                         </div>
 
                         <div class="config-section">
                             <h3>Indirizzamento e subnetting</h3>
-                            <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato con subnetting per edificio.</p>
-                            <ul>
-                                <li>Rete privata: <strong>192.168.X.X</strong></li>
-                                <li>Subnet mask: <strong>255.255.255.0 (/24)</strong></li>
-                                <li>Una sottorete per edificio (fino a 254 host utilizzabili per sede); sottoreti aggiuntive saranno attivabili in seguito.</li>
-                            </ul>
+                            <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato <strong>192.168.X.X</strong> con subnet mask <strong>255.255.255.0 (/24)</strong>. A ciascun edificio viene assegnata una sottorete dedicata con capacità fino a 254 host utilizzabili; sottoreti aggiuntive potranno essere attivate in seguito secondo necessità.</p>
                         </div>
                     </div>
 
@@ -148,64 +138,22 @@
         <section class="slide" data-slide="4">
             <div class="slide-content">
                 <h2><i class="fas fa-project-diagram"></i> Architettura di Rete</h2>
-                <div class="architecture-diagram">
-                    <div class="network-layer">
-                        <h3>Layer 3 - Internet</h3>
-                        <div class="device internet">
-                            <i class="fas fa-globe"></i>
-                            <span>Internet</span>
-                        </div>
-                    </div>
-                    <div class="network-layer">
-                        <h3>Layer 2 - Gateway</h3>
-                        <div class="device modem">
-                            <i class="fas fa-wifi"></i>
-                            <span>Modem/Router</span>
-                        </div>
-                    </div>
-                    <div class="network-layer">
-                        <h3>Layer 1 - LAN</h3>
-                        <div class="devices-row">
-                            <div class="device firewall">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Firewall</span>
-                            </div>
-                            <div class="device switch">
-                                <i class="fas fa-code-branch"></i>
-                                <span>Switch</span>
-                            </div>
-                            <div class="device server">
-                                <i class="fas fa-server"></i>
-                                <span>Server</span>
-                            </div>
-                            <div class="device pc">
-                                <i class="fas fa-desktop"></i>
-                                <span>PC Client</span>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="topology-image">
+                    <img src="images/topologia.png" alt="Topologia di rete Amazin.com">
                 </div>
 
-                <div class="two-column" style="margin-top: 2rem;">
+                <div class="two-column">
                     <div class="column">
                         <div class="config-section">
                             <h3>Topologia e routing</h3>
-                            <ul>
-                                <li>Topologia a stella tra A, B, C, D con tratto a bus D–E.</li>
-                                <li>Accesso alla rete esterna gestito nell’edificio <strong>B</strong>.</li>
-                                <li>Ogni edificio è dotato di un router; collegamenti inter‑sede in <strong>fibra ottica</strong>.</li>
-                                <li>Protocollo di routing interno: <strong>RIP</strong>, adeguato alle dimensioni dell’infrastruttura.</li>
-                            </ul>
+                            <p>La rete adotta una topologia a stella per gli edifici A, B, C e D, con un tratto a bus che collega D ed E. L'accesso alla rete esterna è gestito centralmente dall'edificio <strong>B</strong>, garantendo una distanza massima di 2 hop verso Internet. Ogni edificio è dotato di un router e i collegamenti inter‑sede sono realizzati in <strong>fibra ottica</strong>. Come protocollo di routing interno si utilizza <strong>RIP</strong>, adeguato alle dimensioni contenute dell'infrastruttura.</p>
                         </div>
                     </div>
                     <div class="column">
                         <div class="config-section">
                             <h3>Sicurezza e connettività</h3>
-                            <ul>
-                                <li>Firewall per gestire l’accesso ai servizi pubblici (web e posta) ospitati in <strong>B</strong>.</li>
-                                <li>Access Point Wi‑Fi nell’edificio <strong>A</strong> per la copertura wireless.</li>
-                                <li>Server di <strong>backup</strong> in <strong>C</strong> (elevata interconnessione, carico moderato, assenza Wi‑Fi).</li>
-                            </ul>
+                            <p>Firewall dedicati gestiscono l'accesso ai servizi pubblici (server web e posta elettronica) ospitati nell'edificio <strong>B</strong>. L'edificio <strong>A</strong> dispone di un Access Point Wi‑Fi per garantire copertura wireless agli utenti mobili. Il server di <strong>backup</strong> è collocato nell'edificio <strong>C</strong>, scelto per l'elevata interconnessione con gli altri nodi, il carico utenti moderato e l'assenza di Wi‑Fi che riduce la superficie d'attacco.</p>
                         </div>
                     </div>
                 </div>

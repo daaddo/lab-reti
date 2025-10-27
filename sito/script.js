@@ -8,7 +8,7 @@ class PresentationController {
     }
 
     init() {
-        // Update slide counter
+        // Update slide counter (still useful for reference)
         document.getElementById('total-slides').textContent = this.totalSlides;
         
         // Add keyboard navigation
@@ -17,7 +17,7 @@ class PresentationController {
         // Add touch/swipe support
         this.addTouchSupport();
         
-        // Update navigation state
+        // In scroll mode, disable prev/next when at bounds but don't hide slides
         this.updateNavigation();
         
         // Add smooth transitions
@@ -94,17 +94,11 @@ class PresentationController {
     goToSlide(slideNumber) {
         if (slideNumber < 1 || slideNumber > this.totalSlides) return;
         
-        // Hide current slide
-        this.slides[this.currentSlide - 1].classList.remove('active');
-        
-        // Show new slide
+        // Scroll to target slide in scroll layout
         this.currentSlide = slideNumber;
-        this.slides[this.currentSlide - 1].classList.add('active');
-        
-        // Update UI
+        const target = this.slides[this.currentSlide - 1];
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         this.updateNavigation();
-        
-        // Trigger slide animations
         this.animateSlideContent();
     }
 
@@ -258,24 +252,12 @@ class AutoSaver {
         // Add print optimization
         window.addEventListener('beforeprint', () => {
             document.body.classList.add('printing');
-            // Show all slides for printing
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.style.display = 'block';
-                slide.style.position = 'relative';
-            });
+            // In scroll layout, slides are already block elements A3-sized
         });
 
         window.addEventListener('afterprint', () => {
             document.body.classList.remove('printing');
-            // Restore normal slide display
-            document.querySelectorAll('.slide').forEach((slide, index) => {
-                if (index === presentation.currentSlide - 1) {
-                    slide.style.display = 'flex';
-                    slide.style.position = 'absolute';
-                } else {
-                    slide.style.display = 'none';
-                }
-            });
+            // No need to toggle visibility in scroll layout
         });
     }
 
