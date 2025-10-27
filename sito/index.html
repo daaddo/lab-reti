@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progetto Reti di Computer e Internet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title Slide -->
+        <section class="slide title-slide active" data-slide="1">
+            <div class="slide-content">
+                <div class="title-content">
+                    <div class="network-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h1>Progetto Reti di Computer e Internet</h1>
+                    <div class="subtitle">
+                        <p>Architettura e Configurazione di Infrastrutture di Rete</p>
+                    </div>
+                    <div class="author-info">
+                        <p><strong>Studenti:</strong> Davide Cascella mat:383257<br>Matteo Migliorati mat:300333</p>
+                        <p><strong>Corso:</strong> Laboratorio di Reti</p>
+                        <p><strong>Anno Accademico:</strong> 2024-2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">1</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Indice -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2><i class="fas fa-list"></i> Indice</h2>
+                <div class="index-grid">
+                    <div class="index-item">
+                        <div class="index-number">01</div>
+                        <div class="index-text">
+                            <h3>Introduzione</h3>
+                            <p>Obiettivi e panoramica del progetto</p>
+                        </div>
+                    </div>
+                    <div class="index-item">
+                        <div class="index-number">02</div>
+                        <div class="index-text">
+                            <h3>Architettura di Rete</h3>
+                            <p>Progettazione della topologia</p>
+                        </div>
+                    </div>
+                    <div class="index-item">
+                        <div class="index-number">03</div>
+                        <div class="index-text">
+                            <h3>Dispositivi di Rete</h3>
+                            <p>Modem, router, switch e configurazioni</p>
+                        </div>
+                    </div>
+                    <div class="index-item">
+                        <div class="index-number">04</div>
+                        <div class="index-text">
+                            <h3>Sicurezza</h3>
+                            <p>Firewall e protezione degli host</p>
+                        </div>
+                    </div>
+                    <div class="index-item">
+                        <div class="index-number">05</div>
+                        <div class="index-text">
+                            <h3>Implementazione</h3>
+                            <p>Configurazione pratica e testing</p>
+                        </div>
+                    </div>
+                    <div class="index-item">
+                        <div class="index-number">06</div>
+                        <div class="index-text">
+                            <h3>Conclusioni</h3>
+                            <p>Risultati e sviluppi futuri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">2</span>
+            </div>
+        </section>
+
+        <!-- Slide 3: Introduzione -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2><i class="fas fa-bullseye"></i> Introduzione</h2>
+
+                <div class="config-section">
+                    <h3>Requisiti dei servizi</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-envelope"></i> Posta elettronica: 1 server</li>
+                        <li><i class="fas fa-globe"></i> Web: 1 server</li>
+                        <li><i class="fas fa-server"></i> DNS: 2 server</li>
+                        <li><i class="fas fa-database"></i> Backup: 1 server</li>
+                    </ul>
+                </div>
+
+                <div class="config-section">
+                    <h3>Contesto aziendale e sedi</h3>
+                    <p>L’azienda Amazin.com è organizzata in 5 edifici con le seguenti caratteristiche:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Edificio</th>
+                                <th>Num. utenti</th>
+                                <th>Copertura Wi‑Fi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A</td><td>30</td><td>Sì</td></tr>
+                            <tr><td>B</td><td>40</td><td>No</td></tr>
+                            <tr><td>C</td><td>40</td><td>No</td></tr>
+                            <tr><td>D</td><td>150</td><td>No</td></tr>
+                            <tr><td>E</td><td>50</td><td>No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="config-section">
+                    <h3>Indirizzamento e subnetting</h3>
+                    <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato con subnetting per edificio.</p>
+                    <ul>
+                        <li>Rete privata: <strong>192.168.X.X</strong></li>
+                        <li>Subnet mask: <strong>255.255.255.0 (/24)</strong></li>
+                        <li>Una sottorete per edificio (fino a 254 host utilizzabili per sede); sottoreti aggiuntive saranno attivabili in seguito.</li>
+                    </ul>
+                </div>
+
+                <div class="two-column">
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Topologia e routing</h3>
+                            <ul>
+                                <li>Topologia prevalente a stella con un tratto a bus tra gli edifici D ed E.</li>
+                                <li>Accesso alla rete esterna gestito nell’edificio <strong>B</strong>.</li>
+                                <li>Ogni edificio è dotato di un router; collegamenti inter-sede in fibra ottica.</li>
+                                <li>Protocollo di routing interno: <strong>RIP</strong>, adeguato alle dimensioni dell’infrastruttura.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Sicurezza e connettività</h3>
+                            <ul>
+                                <li>Firewall per la pubblicazione sicura dei servizi esposti (web e posta) ospitati nell’edificio <strong>B</strong>.</li>
+                                <li>Access Point Wi‑Fi previsto nell’edificio <strong>A</strong> per la copertura wireless.</li>
+                                <li>Server di backup collocato nell’edificio <strong>C</strong> (buona interconnessione, carico utenti moderato, assenza di Wi‑Fi).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">3</span>
+            </div>
+        </section>
+
+        <!-- Slide 4: Architettura di Rete -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2><i class="fas fa-project-diagram"></i> Architettura di Rete</h2>
+                <div class="architecture-diagram">
+                    <div class="network-layer">
+                        <h3>Layer 3 - Internet</h3>
+                        <div class="device internet">
+                            <i class="fas fa-globe"></i>
+                            <span>Internet</span>
+                        </div>
+                    </div>
+                    <div class="network-layer">
+                        <h3>Layer 2 - Gateway</h3>
+                        <div class="device modem">
+                            <i class="fas fa-wifi"></i>
+                            <span>Modem/Router</span>
+                        </div>
+                    </div>
+                    <div class="network-layer">
+                        <h3>Layer 1 - LAN</h3>
+                        <div class="devices-row">
+                            <div class="device firewall">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Firewall</span>
+                            </div>
+                            <div class="device switch">
+                                <i class="fas fa-code-branch"></i>
+                                <span>Switch</span>
+                            </div>
+                            <div class="device server">
+                                <i class="fas fa-server"></i>
+                                <span>Server</span>
+                            </div>
+                            <div class="device pc">
+                                <i class="fas fa-desktop"></i>
+                                <span>PC Client</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">4</span>
+            </div>
+        </section>
+
+        <!-- Slide 5: Template per contenuti tecnici -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2><i class="fas fa-cogs"></i> Configurazione Dispositivi</h2>
+                <div class="config-section">
+                    <div class="config-header">
+                        <h3>Network Configuration</h3>
+                        <span class="config-type">Linux/Bash</span>
+                    </div>
+                    <div class="code-block">
+                        <pre><code># Configurazione interfaccia di rete
+sudo ip addr add 192.168.1.1/24 dev eth0
+sudo ip link set eth0 up
+
+# Route di default
+sudo ip route add default via 203.0.113.1
+
+# Configurazione iptables firewall
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+sudo iptables -A INPUT -j DROP
+
+# Salvataggio configurazione
+sudo iptables-save > /etc/iptables/rules.v4</code></pre>
+                    </div>
+                    <div class="config-notes">
+                        <h4>Note di Configurazione:</h4>
+                        <ul>
+                            <li>Configurazione IP statico con iproute2</li>
+                            <li>Gateway di default verso ISP</li>
+                            <li>Regole firewall con iptables</li>
+                            <li>Salvataggio persistente delle regole</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">5</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation">
+        <button class="nav-btn prev-btn" onclick="previousSlide()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">5</span>
+        </span>
+        <button class="nav-btn next-btn" onclick="nextSlide()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Print Instructions -->
+    <div class="print-instructions no-print">
+        <p><i class="fas fa-info-circle"></i> Per salvare come PDF: Ctrl+P → Destinazione: Salva come PDF → Formato: A3</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
