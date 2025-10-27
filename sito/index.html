@@ -92,22 +92,6 @@
             <div class="slide-content">
                 <h2><i class="fas fa-bullseye"></i> Introduzione</h2>
 
-                <div class="two-column">
-                    <div class="column">
-                        <div class="config-section">
-                            <h3>Requisiti dei servizi</h3>
-                            <p>L'infrastruttura aziendale richiede i seguenti server: <strong>1 server di posta elettronica</strong>, <strong>1 server web</strong>, <strong>2 server DNS</strong> per garantire ridondanza e <strong>1 server di backup</strong> per la protezione dei dati.</p>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="config-section">
-                            <h3>Indirizzamento e subnetting</h3>
-                            <p>Gli utenti sono complessivamente 310 distribuiti in 5 edifici. Per la rete interna si adotta un indirizzamento privato <strong>192.168.X.X</strong> con subnet mask <strong>255.255.255.0 (/24)</strong>. A ciascun edificio viene assegnata una sottorete dedicata con capacità fino a 254 host utilizzabili; sottoreti aggiuntive potranno essere attivate in seguito secondo necessità.</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="config-section full-width">
                     <h3>Contesto aziendale e sedi</h3>
                     <p>L'azienda Amazin.com è organizzata in 5 edifici con le seguenti caratteristiche:</p>
@@ -127,6 +111,48 @@
                             <tr><td>E</td><td>50</td><td>No</td></tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="two-column">
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Requisiti dei servizi</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Servizio</th>
+                                        <th>Numero server</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Posta elettronica</td><td>1</td></tr>
+                                    <tr><td>Web</td><td>1</td></tr>
+                                    <tr><td>DNS</td><td>2</td></tr>
+                                    <tr><td>Backup</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="config-section">
+                            <h3>Indirizzamento e subnetting</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Parametro</th>
+                                        <th>Valore</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Rete privata</td><td>192.168.X.X</td></tr>
+                                    <tr><td>Subnet mask</td><td>255.255.255.0 (/24)</td></tr>
+                                    <tr><td>Host per sottorete</td><td>254 utilizzabili</td></tr>
+                                    <tr><td>Sottoreti assegnate</td><td>6 (una per edificio e dmz)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="slide-footer">
