@@ -1616,6 +1616,127 @@ dns-nameservers 192.168.5.2 192.168.10.3
                 <span class="slide-number">36</span>
             </div>
         </section>
+
+        <!-- Slide 37: Configurazione Firewall Interno -->
+        <section class="slide" data-slide="37">
+            <div class="slide-content">
+                <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Firewall Interno (IN)</h3>
+                        <span class="config-type">iptables</span>
+                    </div>
+                    <p>Abbiamo due firewall: uno interno, che implementa più misure di protezione essendo appunto interno alla nostra rete; e uno esterno, il quale avrà meno misure di protezione dovendo essere accessibile dall'esterno.</p>
+                    <p><strong>Inizializzazione e policy di default</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -F FORWARD
+iptables -F INPUT
+iptables -F OUTPUT
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP</code></pre>
+                    </div>
+                    <p><strong>Regole per DNS2</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A FORWARD -p udp -d 192.168.5.2 --dport 53 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.5.2 --dport 53 -j ACCEPT</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">37</span>
+            </div>
+        </section>
+
+        <!-- Slide 38: Configurazione Firewall Interno - Regole Mail e Web -->
+        <section class="slide" data-slide="38">
+            <div class="slide-content">
+                <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Firewall Interno (IN) - Regole Applicative</h3>
+                        <span class="config-type">iptables</span>
+                    </div>
+                    <p><strong>Regole per posta elettronica</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 25 -m limit --limit 100/s -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 110 -m limit --limit 100/s -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 143 -m limit --limit 100/s -j ACCEPT</code></pre>
+                    </div>
+                    <p><strong>Regole per web</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A FORWARD -p tcp -d 192.168.10.4 --dport 443 -m limit --limit 100/s -j ACCEPT</code></pre>
+                    </div>
+                    <p><strong>Regole per connessioni già stabilite</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">38</span>
+            </div>
+        </section>
+
+        <!-- Slide 39: Configurazione Firewall Esterno -->
+        <section class="slide" data-slide="39">
+            <div class="slide-content">
+                <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Firewall Esterno (OUT)</h3>
+                        <span class="config-type">iptables</span>
+                    </div>
+                    <p><strong>Regole per DNS1, posta elettronica e web</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 25 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 110 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 143 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.3 --dport 53 -j ACCEPT
+iptables -A FORWARD -p udp -d 192.168.10.3 --dport 53 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.4 --dport 443 -j ACCEPT</code></pre>
+                    </div>
+                    <p><strong>Regole per connessioni già stabilite</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -p tcp -j REJECT --reject-with tcp-reset</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">39</span>
+            </div>
+        </section>
+
+        <!-- Slide 40: Configurazione Firewall Esterno - NAT -->
+        <section class="slide" data-slide="40">
+            <div class="slide-content">
+                <h2><i class="fas fa-shield-alt"></i> Configurazione Firewall</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Firewall Esterno (OUT) - NAT</h3>
+                        <span class="config-type">iptables NAT</span>
+                    </div>
+                    <p><strong>Regole per NAT</strong></p>
+                    <div class="code-block">
+                        <pre><code>iptables -t nat -A PREROUTING -p tcp --dport 25 -j DNAT --to-destination 192.168.10.2
+iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to-destination 192.168.10.3
+iptables -t nat -A PREROUTING -p tcp --dport 53 -j DNAT --to-destination 192.168.10.3
+iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 192.168.10.4
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">40</span>
+            </div>
+        </section>
     </div>
 
     <!-- Navigation Controls -->
@@ -1624,7 +1745,7 @@ dns-nameservers 192.168.5.2 192.168.10.3
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">36</span>
+            <span id="current-slide">1</span> / <span id="total-slides">40</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
