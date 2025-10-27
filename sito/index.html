@@ -154,6 +154,27 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="config-section full-width">
+                    <h3>Assegnazione sottoreti</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sede</th>
+                                <th>Sottorete</th>
+                                <th>Capienza</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A</td><td>192.168.3.0/24</td><td>30</td></tr>
+                            <tr><td>B</td><td>192.168.2.0/24</td><td>40</td></tr>
+                            <tr><td>C</td><td>192.168.5.0/24</td><td>40</td></tr>
+                            <tr><td>D</td><td>192.168.1.0/24</td><td>150</td></tr>
+                            <tr><td>E</td><td>192.168.4.0/24</td><td>50</td></tr>
+                            <tr><td>B (DMZ)</td><td>192.168.10.0/24</td><td>—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="slide-footer">
                 <span class="slide-number">3</span>
@@ -183,14 +204,73 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="config-section full-width">
+                    <h3>Server e servizi di rete</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sede</th>
+                                <th>Servizio</th>
+                                <th>IP server</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>B</td><td>Posta elettronica</td><td>192.168.10.2</td></tr>
+                            <tr><td>B</td><td>Web</td><td>192.168.10.4</td></tr>
+                            <tr><td>B</td><td>DNS Esterno slave 1</td><td>192.168.10.3</td></tr>
+                            <tr><td>B</td><td>Nagios</td><td>192.168.10.30</td></tr>
+                            <tr><td>C</td><td>DNS Interno Master 2</td><td>192.168.5.2</td></tr>
+                            <tr><td>C</td><td>Backup</td><td>192.168.5.3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="slide-footer">
                 <span class="slide-number">4</span>
             </div>
         </section>
 
-        <!-- Slide 5: Template per contenuti tecnici -->
+        <!-- Slide 5: Backbone e Interconnessioni -->
         <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2><i class="fas fa-network-wired"></i> Backbone e Interconnessioni</h2>
+                
+                <div class="config-section">
+                    <h3>Configurazione backbone inter-router</h3>
+                    <p>La backbone tra i vari router è costituita utilizzando come indirizzamento IP <strong>10.0.0.0/30</strong>, in modo che ogni sottorete punto-punto abbia due indirizzi IP utilizzabili per i collegamenti diretti tra router.</p>
+                </div>
+
+                <div class="config-section full-width">
+                    <h3>Assegnazione indirizzi backbone</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Collegamento</th>
+                                <th>Router 1</th>
+                                <th>IP Router 1</th>
+                                <th>Router 2</th>
+                                <th>IP Router 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Backbone 1</td><td>B</td><td>10.0.0.1</td><td>C</td><td>10.0.0.2</td></tr>
+                            <tr><td>Backbone 2</td><td>C</td><td>10.0.0.5</td><td>D</td><td>10.0.0.6</td></tr>
+                            <tr><td>Backbone 3</td><td>B</td><td>10.0.0.9</td><td>D</td><td>10.0.0.10</td></tr>
+                            <tr><td>Backbone 4</td><td>B</td><td>10.0.0.13</td><td>A</td><td>10.0.0.14</td></tr>
+                            <tr><td>Backbone 5</td><td>E</td><td>10.0.0.17</td><td>D</td><td>10.0.0.18</td></tr>
+                            <tr><td>Backbone 6</td><td>B</td><td>10.0.0.21</td><td>BDMZ</td><td>10.0.0.24</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">5</span>
+            </div>
+        </section>
+
+        <!-- Slide 6: Configurazione Dispositivi -->
+        <section class="slide" data-slide="6">
             <div class="slide-content">
                 <h2><i class="fas fa-cogs"></i> Configurazione Dispositivi</h2>
                 <div class="config-section">
@@ -226,7 +306,7 @@ sudo iptables-save > /etc/iptables/rules.v4</code></pre>
                 </div>
             </div>
             <div class="slide-footer">
-                <span class="slide-number">5</span>
+                <span class="slide-number">6</span>
             </div>
         </section>
     </div>
@@ -237,7 +317,7 @@ sudo iptables-save > /etc/iptables/rules.v4</code></pre>
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">5</span>
+            <span id="current-slide">1</span> / <span id="total-slides">6</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
