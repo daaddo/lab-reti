@@ -375,6 +375,58 @@ h3 {
     font-weight: bold;
 }
 
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+table thead {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.3));
+}
+
+table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #3b82f6;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.4);
+    font-size: 1rem;
+}
+
+table td {
+    padding: 0.875rem 1rem;
+    color: #e2e8f0;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    font-size: 0.95rem;
+}
+
+table tbody tr {
+    transition: all 0.3s ease;
+}
+
+table tbody tr:nth-child(odd) {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.15);
+    transform: scale(1.01);
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
 /* Slide Footer */
 .slide-footer {
     margin-top: auto;
