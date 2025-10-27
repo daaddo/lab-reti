@@ -269,44 +269,162 @@
             </div>
         </section>
 
-        <!-- Slide 6: Configurazione Dispositivi -->
+        <!-- Slide 6: Configurazione Host - Edifici A e B -->
         <section class="slide" data-slide="6">
             <div class="slide-content">
-                <h2><i class="fas fa-cogs"></i> Configurazione Dispositivi</h2>
-                <div class="config-section">
+                <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
+                
+                <div class="config-section config-large">
                     <div class="config-header">
-                        <h3>Network Configuration</h3>
-                        <span class="config-type">Linux/Bash</span>
+                        <h3>Edificio A</h3>
+                        <span class="config-type">DHCP</span>
                     </div>
+                    <p><strong>Rete:</strong> 192.168.3.0/24<br>
+                    <strong>IP host:</strong> 192.168.3.10 - 192.168.3.40<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
                     <div class="code-block">
-                        <pre><code># Configurazione interfaccia di rete
-sudo ip addr add 192.168.1.1/24 dev eth0
-sudo ip link set eth0 up
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet dhcp
 
-# Route di default
-sudo ip route add default via 203.0.113.1
-
-# Configurazione iptables firewall
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-sudo iptables -A INPUT -j DROP
-
-# Salvataggio configurazione
-sudo iptables-save > /etc/iptables/rules.v4</code></pre>
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
                     </div>
-                    <div class="config-notes">
-                        <h4>Note di Configurazione:</h4>
-                        <ul>
-                            <li>Configurazione IP statico con iproute2</li>
-                            <li>Gateway di default verso ISP</li>
-                            <li>Regole firewall con iptables</li>
-                            <li>Salvataggio persistente delle regole</li>
-                        </ul>
+                    <p>L'edificio A presenta un Server DHCP che si occupa dell'assegnazione automatica degli indirizzi agli host.</p>
+                </div>
+
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Edificio B</h3>
+                        <span class="config-type">Statico</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.2.0/24<br>
+                    <strong>IP host:</strong> 192.168.2.10 - 192.168.2.50<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
+                    <div class="code-block">
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet static
+address 192.168.2.11
+netmask 255.255.255.0
+gateway 192.168.2.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
                     </div>
                 </div>
             </div>
             <div class="slide-footer">
                 <span class="slide-number">6</span>
+            </div>
+        </section>
+
+        <!-- Slide 7: Configurazione Host - Edifici C e D -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Edificio C</h3>
+                        <span class="config-type">Statico</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.5.0/24<br>
+                    <strong>IP host:</strong> 192.168.5.10 - 192.168.5.50<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
+                    <div class="code-block">
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet static
+address 192.168.5.11
+netmask 255.255.255.0
+gateway 192.168.5.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Edificio D</h3>
+                        <span class="config-type">Statico</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.1.0/24<br>
+                    <strong>IP host:</strong> 192.168.1.10 - 192.168.1.160<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
+                    <div class="code-block">
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet static
+address 192.168.1.11
+netmask 255.255.255.0
+gateway 192.168.1.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">7</span>
+            </div>
+        </section>
+
+        <!-- Slide 8: Configurazione Host - Edifici E e B DMZ -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2><i class="fas fa-cogs"></i> Configurazione Host</h2>
+                
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Edificio E</h3>
+                        <span class="config-type">Statico</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.4.0/24<br>
+                    <strong>IP host:</strong> 192.168.4.10 - 192.168.4.60<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
+                    <div class="code-block">
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet static
+address 192.168.4.11
+netmask 255.255.255.0
+gateway 192.168.4.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+
+                <div class="config-section config-large">
+                    <div class="config-header">
+                        <h3>Edificio B (DMZ)</h3>
+                        <span class="config-type">Statico</span>
+                    </div>
+                    <p><strong>Rete:</strong> 192.168.10.0/24<br>
+                    <strong>IP host:</strong> 192.168.10.100 - 192.168.10.200<br>
+                    <strong>DNS1:</strong> 192.168.5.2<br>
+                    <strong>DNS2:</strong> 192.168.10.3</p>
+                    <div class="code-block">
+                        <pre><code># /etc/network/interfaces
+iface enp0s3 inet static
+address 192.168.10.101
+netmask 255.255.255.0
+gateway 192.168.10.1
+dns-nameservers 192.168.5.2 192.168.10.3
+
+# Riavvia networking
+sudo systemctl restart networking</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="slide-number">8</span>
             </div>
         </section>
     </div>
@@ -317,7 +435,7 @@ sudo iptables-save > /etc/iptables/rules.v4</code></pre>
             <i class="fas fa-chevron-left"></i>
         </button>
         <span class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">6</span>
+            <span id="current-slide">1</span> / <span id="total-slides">8</span>
         </span>
         <button class="nav-btn next-btn" onclick="nextSlide()">
             <i class="fas fa-chevron-right"></i>
