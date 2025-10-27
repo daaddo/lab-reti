@@ -475,6 +475,17 @@ table tbody tr:last-child td {
     border-bottom: none;
 }
 
+/* Compact Table Styles - Only for Introduction page */
+table.table-compact th {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+}
+
+table.table-compact td {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.82rem;
+}
+
 /* Slide Footer */
 .slide-footer {
     position: absolute;
