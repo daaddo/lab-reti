@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  presentazione-reti:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: presentazione-lab-reti
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - frontend-network
+    labels:
+      - "description=Presentazione Progetto Reti di Computer e Internet"
+      - "maintainer=Davide Cascella, Matteo Migliorati"
+
+networks:
+  frontend-network:
+    driver: bridge
+
+
